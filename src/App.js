@@ -129,43 +129,16 @@ class App extends Component {
     return (
       <div className="container">
         <div className="tab-panel">
-        {step === 1 && 
-          stepTitles.map((title, index) => (
+          {stepTitles.map((title, index) => (
             <Step
                 key={ title }
                 onClick={ this.handleTabClick }
-                isSelected={ index === 0 ? true : false }
+                isSelected={ index === (step-1) }
                 number={ index+1 }
-                isClickable={ false }>
+                isClickable={ index < (step-1) }>
 
                 { title }
               </Step>
-          ))}
-
-        {step === 2 && 
-          stepTitles.map((title, index) => (
-            <Step
-              key={ title }
-              onClick={ this.handleTabClick }
-              isSelected={ index === 1 ? true : false }
-              number={ index+1 }
-              isClickable={ index === 0 ? true : false }>
-          
-              { title }
-            </Step>
-          ))}
-
-        {step === 3 && 
-          stepTitles.map((title, index) => (
-            <Step
-              key={ title }
-              onClick={ this.handleTabClick }
-              isSelected={ index === 2 ? true : false }
-              number={ index+1 }
-              isClickable={ index === 2 ? false : true }>
-
-              { title }
-            </Step>
           ))}
         </div>
         
