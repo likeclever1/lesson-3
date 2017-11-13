@@ -9,28 +9,49 @@ export class CardForm extends Component {
     this.state = {
       leftTime: 120
     };
+
     props.onChangeTimeOver(false);
+
+    this.handleChangeForm = this.handleChangeForm.bind(this);
   }
 
   componentDidMount() {
-    this.id = setInterval(() => {
+    this.id = setInterval(function() {
       const leftTime = Math.max(this.state.leftTime - 1, 0);
-      this.setState({leftTime});
       if (leftTime === 0 && this.state.leftTime === 1) {
         this.props.onChangeTimeOver(true);
+        clearInterval(this.id);
       }
-    }, 1000);
+      this.setState({leftTime});
+    }.bind(this), 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.id);
   }
 
+  handleChangeForm(e) {
+    const {
+      onChangeForm
+    } = this.props;
+
+    onChangeForm(e.target.name, e.target.value);
+  }
+
   render() {
-    const {leftTime} = this.state;
+    const {
+      leftTime
+    } = this.state;
+
+    const {
+      cardNumber
+    } = this.props;
+
     return (
-      <div>
+      <div className="card-form">
         <Title>Номер карты</Title>
+        <input value={ cardNumber } name="cardNumber" type="text" placeholder="0000000000000000"
+          onChange={ this.handleChangeForm } />
         <p className="left-time">Осталось {leftTime} секунд</p>
       </div>
     );
