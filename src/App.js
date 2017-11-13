@@ -33,11 +33,8 @@ class App extends Component {
   }
 
   handleChangeForm(field, value) {
-    let temp = {};
-    temp[field] = value;
-
     this.setState({
-      ...temp
+      [field]: value
     });
   }
 
